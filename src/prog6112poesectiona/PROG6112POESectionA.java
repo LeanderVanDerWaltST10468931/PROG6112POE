@@ -31,11 +31,59 @@ public class PROG6112POESectionA
                     + "(6) Exit Application");
             
             input = scanner.next();
+            String seriesID;
+            String seriesName;
+            String seriesAge = "";
+            int seriesAgeNumber = 0;
+            String seriesNumberOfEpisodes;
+            boolean repeatAgeInput = true;
             
             switch (input)
             {
                 case "1":
+                { 
+                    System.out.print("CAPTURE A NEW SERIES\n"
+                    + "******************************\n"
+                    + "Enter the series id: ");
+                    seriesID = scanner.next();
+                    
+                    System.out.print("Enter the series name: ");
+                    seriesName = scanner.next();
+                    
+                    System.out.print("Enter the series age restriction: ");
+                    while (repeatAgeInput)
+                    {
+                        seriesAge = scanner.next();
+                        try
+                        {
+                            seriesAgeNumber = Integer.parseInt(seriesAge);
+                        }
+                        catch(Exception e)
+                        {
+                            System.out.println("Please input a number for the age.");
+                        }
+                        
+                        if ((seriesAgeNumber >= 2) && (seriesAgeNumber <= 18))
+                        {
+                            repeatAgeInput = false;
+                        }
+                        else 
+                        {
+                            System.out.print("You have entered the incorrect series age!!!"
+                                    + "\nPlease re-enter the series age >> ");
+                            
+                        }
+                    }
+                    
+                    System.out.print("Enter the number of episodes for " +  seriesName + ": ");
+                    seriesNumberOfEpisodes = scanner.next();
+                    
+                    Series series = new Series(seriesID, seriesName, seriesAge, seriesNumberOfEpisodes);
+                }
                 case "2":
+                {
+                    
+                }
                 case "3":
                 case "4":
                 case "5":
