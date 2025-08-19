@@ -37,6 +37,7 @@ public class PROG6112POESectionA
             int seriesAgeNumber = 0;
             String seriesNumberOfEpisodes;
             boolean repeatAgeInput = true;
+            Series series = new Series();
             
             switch (input)
             {
@@ -49,7 +50,7 @@ public class PROG6112POESectionA
                     
                     System.out.print("Enter the series name: ");
                     seriesName = scanner.next();
-                    
+                                        
                     System.out.print("Enter the series age restriction: ");
                     while (repeatAgeInput)
                     {
@@ -78,15 +79,85 @@ public class PROG6112POESectionA
                     System.out.print("Enter the number of episodes for " +  seriesName + ": ");
                     seriesNumberOfEpisodes = scanner.next();
                     
-                    Series series = new Series(seriesID, seriesName, seriesAge, seriesNumberOfEpisodes);
+                    series.CaptureSeries(seriesID, seriesName, seriesAge, seriesNumberOfEpisodes, repeatAgeInput);
+                    break;
                 }
-                case "2":
+                case "2": 
                 {
+                    System.out.print("Enter the series id to search: ");
+                    seriesID = scanner.next();
+                    System.out.print("------------------------------\n");
                     
+                    try 
+                    {
+                        series.SearchSeries(seriesID);
+                    }
+                    catch(Exception e)
+                    {
+                        System.out.println("Series with id " + seriesID + " was not found!\n"
+                                + "------------------------------");
+                    }
+                    break;
                 }
                 case "3":
+                {
+                    System.out.print("Enter the series id to update: ");
+                    seriesID = scanner.next();
+                    
+                    if (series.TestID(seriesID) != -1)
+                    {
+                        System.out.print("Enter the series name: ");
+                        seriesName = scanner.next();
+                    
+                         System.out.print("Enter the series age restriction: ");
+                         seriesAge = scanner.next();
+                    
+                         System.out.print("Enter the number of episodes: ");
+                            seriesNumberOfEpisodes = scanner.next();
+                    
+                          series.UpdateSeries(seriesID, seriesName, seriesAge, seriesNumberOfEpisodes);
+                    
+                    }
+                    else
+                         System.out.println("Series with id " + seriesID + " was not found!\n"
+                            + "------------------------------");
+                    
+                    
+                    break;
+                }
                 case "4":
+                {
+                    System.out.print("Enter the series id to delete: ");
+                    seriesID = scanner.next();
+                    
+                    if (series.TestID(seriesID) != -1)
+                    {
+                        System.out.println("Are you sure you want to delete series" + seriesID
+                            + "from the system? Yes (y) to delete");
+                        
+                        if (scanner.next().equals("y"))
+                        {
+                            series.DeleteSeries();
+                            System.out.println("------------------------------\n"
+                                    + "Series with Series id: " + seriesID + " WAS deleted!\n"
+                                            + "------------------------------");
+                        }
+                        else
+                            System.out.println("Series with id: " + seriesID + " was not deleted");
+                        
+                    }
+                    else
+                        System.out.println("Series with id " + seriesID + " was not found!\n"
+                            + "------------------------------");
+                    
+                }
                 case "5":
+                {   
+                    if (series.counter > 0)
+                        series.DisplaySeries();
+                    else
+                        System.out.println("No series have been added yet!");
+                }
                 case "6": System.exit(0);  
                 default : System.out.println("Code not found, please enter a valid one.");
             }

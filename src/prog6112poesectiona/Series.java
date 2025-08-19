@@ -14,13 +14,10 @@ public class Series
     public ArrayList<String> SeriesAge = new ArrayList<String>();
     public ArrayList<String> SeriesNumberOfEpisodes = new ArrayList<String>();
     
-    public Series(String SeriesID, String SeriesName, String SeriesAge, String SeriesNumberOfEpisodes)
+    
+    public int TestID(String SeriesID)
     {
-        this.SeriesID.add(SeriesID);
-        this.SeriesName.add(SeriesName);
-        this.SeriesAge.add(SeriesAge);
-        this.SeriesNumberOfEpisodes.add(SeriesNumberOfEpisodes);
-        counter += 1;
+        return this.SeriesID.indexOf(SeriesID);
     }
     
     public void CaptureSeries(String SeriesID, String SeriesName, String SeriesAge, String SeriesNumberOfEpisodes, boolean repeatAge)
@@ -50,35 +47,54 @@ public class Series
         
         if (searchPos != -1)
         {
-            System.out.println("\n ------------------\n"
+            System.out.println("------------------------------\n"
                 + "SERIES ID: " + this.SeriesID.get(searchPos) + "\n"
                 + "SERIES NAME: " + SeriesName.get(searchPos) + "\n"
                 + "SERIES AGE RESTRICTION: " + SeriesAge.get(searchPos) + "\n"
                 + "SERIES NUMBER OF EPISODES: " + SeriesNumberOfEpisodes.get(searchPos) + "\n"
-                + "-------------------\n");
+                + "------------------------------\n");
         }        
         else
-            System.out.println("\n ------------------\n"
-                + "Series with ID " + SeriesID + " was not found!\n"
-                + "-------------------\n");
+            System.out.println("Series with id " + SeriesID + " was not found!\n"
+                + "------------------------------");
     }
     
     public void UpdateSeries(String SeriesID, String SeriesName, String SeriesAge, String SeriesNumberOfEpisodes)
     {
-        this.SeriesID.set(counter, SeriesID);
-        this.SeriesName.set(counter, SeriesName);
-        this.SeriesAge.set(counter, SeriesAge);
-        this.SeriesNumberOfEpisodes.set(counter, SeriesNumberOfEpisodes);
-        counter -=1;
+        int searchPos = this.SeriesID.indexOf(SeriesID);
+        
+        if (searchPos != -1)
+        {
+            this.SeriesName.set(counter, SeriesName);
+            this.SeriesAge.set(counter, SeriesAge);
+            this.SeriesNumberOfEpisodes.set(counter, SeriesNumberOfEpisodes);
+        }
+        else
+            System.out.println("Series with id " + SeriesID + " was not found!\n"
+                + "------------------------------");
     }
     
     public void DeleteSeries()
     {
-        SeriesID.remove(counter);
-        SeriesName.remove(counter);
-        SeriesAge.remove(counter);
-        SeriesNumberOfEpisodes.remove(counter);
-        counter -=1;
+        this.SeriesID.remove(counter);
+        this.SeriesName.remove(counter);
+        this.SeriesAge.remove(counter);
+        this.SeriesNumberOfEpisodes.remove(counter);
+        this.counter -=1;
+    }
+    
+    public void DisplaySeries()
+    {
+        for (int counter =0; counter <= this.counter; counter++)
+        {
+            System.out.println("Series " + counter + "\n"
+                    + "------------------------------\n"
+                    + "SERIES ID: " + this.SeriesID.get(counter) + "\n"
+                    + "SERIES NAME: " + this .SeriesName.get(counter) + "\n"
+                    + "SERIES AGE RESTRICTION: " + this.SeriesAge.get(counter) + "\n"
+                    + "NUMBER OF EPISODES: " + this.SeriesNumberOfEpisodes.get(counter) + "\n"
+                    + "------------------------------");
+        }
     }
     
 }
