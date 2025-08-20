@@ -14,14 +14,18 @@ public class PROG6112POESectionA
     {
         System.out.println("LATEST SERIES - 2025");
         System.out.println("******************************");
-        System.out.println("Enter (1) to launch menu or any other key to exit\n");
+        System.out.println("Enter (1) to launch menu or any other key to exit");
         
         Scanner scanner = new Scanner(System.in);
         
         String input = scanner.next();
+        Series series = new Series();
+        boolean repeatOptions = true;
         
         if (input.equals("1"))
         {
+            while (repeatOptions)
+            {
             System.out.println("Please select one of the following menu items: \n"
                     + "(1) Capture new series.\n"
                     + "(2) Search for a series.\n"
@@ -37,7 +41,6 @@ public class PROG6112POESectionA
             int seriesAgeNumber = 0;
             String seriesNumberOfEpisodes;
             boolean repeatAgeInput = true;
-            Series series = new Series();
             
             switch (input)
             {
@@ -90,7 +93,7 @@ public class PROG6112POESectionA
                     
                     try 
                     {
-                        series.SearchSeries(seriesID);
+                       System.out.println(series.SearchSeries(seriesID));
                     }
                     catch(Exception e)
                     {
@@ -137,7 +140,7 @@ public class PROG6112POESectionA
                         
                         if (scanner.next().equals("y"))
                         {
-                            series.DeleteSeries();
+                            series.DeleteSeries(seriesID);
                             System.out.println("------------------------------\n"
                                     + "Series with Series id: " + seriesID + " WAS deleted!\n"
                                             + "------------------------------");
@@ -160,6 +163,17 @@ public class PROG6112POESectionA
                 }
                 case "6": System.exit(0);  
                 default : System.out.println("Code not found, please enter a valid one.");
+            }
+            
+            System.out.println("Enter (1) to launch menu or any other key to exit");
+            input = scanner.next();
+            if (input.equals("1"))
+            {
+                
+            }
+            else
+                System.exit(0);
+            
             }
         }
         else 

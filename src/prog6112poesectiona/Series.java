@@ -31,6 +31,7 @@ public class Series
             this.SeriesNumberOfEpisodes.add(SeriesNumberOfEpisodes);
             counter += 1;
             repeatAge = false;
+            System.out.println("Series processed successfully!!!");
         }
         else
         {
@@ -41,13 +42,13 @@ public class Series
         
     }
     
-    public void SearchSeries(String SeriesID)
+    public String SearchSeries(String SeriesID)
     {
         int searchPos = this.SeriesID.indexOf(SeriesID);
         
         if (searchPos != -1)
         {
-            System.out.println("------------------------------\n"
+            return ("------------------------------\n"
                 + "SERIES ID: " + this.SeriesID.get(searchPos) + "\n"
                 + "SERIES NAME: " + SeriesName.get(searchPos) + "\n"
                 + "SERIES AGE RESTRICTION: " + SeriesAge.get(searchPos) + "\n"
@@ -55,7 +56,7 @@ public class Series
                 + "------------------------------\n");
         }        
         else
-            System.out.println("Series with id " + SeriesID + " was not found!\n"
+            return("Series with id " + SeriesID + " was not found!\n"
                 + "------------------------------");
     }
     
@@ -74,13 +75,18 @@ public class Series
                 + "------------------------------");
     }
     
-    public void DeleteSeries()
+    public void DeleteSeries(String SeriesID)
     {
-        this.SeriesID.remove(counter);
-        this.SeriesName.remove(counter);
-        this.SeriesAge.remove(counter);
-        this.SeriesNumberOfEpisodes.remove(counter);
-        this.counter -=1;
+        int searchPos = this.SeriesID.indexOf(SeriesID);
+        
+        if (searchPos != -1)
+        {
+            this.SeriesID.remove(counter);
+            this.SeriesName.remove(counter);
+            this.SeriesAge.remove(counter);
+            this.SeriesNumberOfEpisodes.remove(counter);
+            this.counter -=1;
+        }
     }
     
     public void DisplaySeries()
